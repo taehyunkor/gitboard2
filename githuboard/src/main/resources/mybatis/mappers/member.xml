@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+<select id="login" 
+	parameterType="PortfolioMember" 
+	resultType="PortfolioMember">
+		select email, nickname
+		from portfoliomember
+		where email=#{email} and password=#{password}
+</select>
+<select id="emailcheck" parameterType="java.lang.String" resultType="java.lang.String">
+   select email
+   from portfoliomember
+   where email=#{email}
+</select>
+<select id="nicknamecheck" parameterType="java.lang.String" resultType="java.lang.String">
+   select email
+   from portfoliomember
+   where nickname=#{nickname}
+</select>
+
+
+
+
+</mapper>
