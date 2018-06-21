@@ -66,7 +66,27 @@ public class HomeController {
 		
 		return "redirect:./";
 	}
-
+	
+	@RequestMapping(value="register", method=RequestMethod.GET)
+	public String register() {
+		return "register";
+	}
+	
+	//회원가입을 처리하는 메소드
+		@RequestMapping(value="register", method=RequestMethod.POST)
+		public String register(PortfolioMember member, HttpSession session, RedirectAttributes attr) {
+			userService.register(member);
+			session.invalidate();
+			attr.addFlashAttribute("msg", "회원 가입에 성공하셨습니다.");
+				
+			return "redirect:login";
+		}
+	
+		@RequestMapping(value = "chat", method = RequestMethod.GET)
+		public String chat() {
+			
+			return "chat";
+		}
 	
 	
 }

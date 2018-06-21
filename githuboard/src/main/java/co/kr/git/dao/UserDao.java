@@ -26,7 +26,10 @@ public class UserDao {
 		return sqlSession.selectOne("member.nickname",nickname);
 	}
 	
-	
+	//회원가입을 처리하기 위한 메소드
+		public void register(PortfolioMember member) {
+			sqlSession.insert("member.register", member);
+		}
 	
 	
 }

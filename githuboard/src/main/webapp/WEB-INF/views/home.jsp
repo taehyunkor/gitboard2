@@ -3,6 +3,10 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <html>
+ <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="jqplot/excanvas.js"></script><![endif]-->
+ 
+
+<link rel="jqplot/stylesheet" href="jqplot/jquery.jqplot.min.css" />
   <head>
 
     
@@ -22,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     <link href="./resources/css/grayscale.min.css" rel="stylesheet">
+
 
   </head>
 
@@ -62,7 +67,7 @@
           
            <c:if test="${member != null}">
           <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="chatting">채팅</a>
+              <a class="nav-link js-scroll-trigger" href="chat">채팅</a>
             </li>
              <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout">Logout</a>
@@ -99,22 +104,31 @@
     <section id="download" class="download-section content-section text-center">
       <div class="container">
         <div class="col-lg-8 mx-auto">
-          <h2>게시판 보기</h2>
+          
         
-          <a href="#page-top" class="btn btn-default btn-lg">게시판 보러가기</a>
-        </div>
+          <a href="boardlist" class="btn btn-default btn-lg">게시판 보러가기</a>
+       
+         
+          
+          <a href="register" class="btn btn-default btn-lg">회원 가입</a>
+         
+       
+      
+     
       </div>
+      </div>
+        <a href="#contact" class="btn btn-circle js-scroll-trigger">
+       <i class="fa fa-angle-double-down animated"></i>
+      </a>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="content-section text-center">
       <div class="container">
-        <h2>회원 가입</h2>
-          
-          <a href="#page-top" class="btn btn-default btn-lg">회원 가입</a>
-         
+       <h2>ip 별 트래픽 합계</h2>
+		<div id="chartdiv" style="height:400px; width:1080px"></div>
        
-      </div>
+       </div>
     </section>
 
 
@@ -132,8 +146,56 @@
     <!-- Plugin JavaScript -->
     <script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-   
 
   </body>
+<script src="jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="jqplot/plugins/jqplot.barRenderer.js"></script>
+<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.js"></script>
+<script type="text/javascript" src="jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.js"></script>
+<script>
+	$.ajax({
+		url:"traffic",
+		data:{},
+		dataType:"json",
+		success:function(data){
+			 var s1 = new Array();
+		     var ticks = new Array();
+			for(key in data){
+				ticks.push(key);
+				s1.push(data[key]);
+			}
+			
+			 $.jqplot.config.enablePlugins = true;
+		       
+		        plot1 = $.jqplot('chartdiv', [s1], {
+		            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+		            animate: !$.jqplot.use_excanvas,
+		            seriesDefaults:{
+		                renderer:$.jqplot.BarRenderer,
+		                pointLabels: { show: true }
+		            },
+		            axes: {
+		                xaxis: {
+		                    renderer: $.jqplot.CategoryAxisRenderer,
+		                    ticks: ticks
+		                }
+		            },
+		            highlighter: { show: false }
+		        });
+		        $('#chartdiv').bind('jqplotDataClick', 
+			            function (ev, seriesIndex, pointIndex, data) {
+			                $('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+			            }
+			        );
+
+		}
+	});
+</script>
+
+
+
+
+
 
 </html>

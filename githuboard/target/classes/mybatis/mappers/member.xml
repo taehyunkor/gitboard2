@@ -21,7 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    from portfoliomember
    where nickname=#{nickname}
 </select>
-
+<insert id="register"
+	parameterType="PortfolioMember">
+		insert into portfoliomember(email, password, nickname)
+		values(#{email}, #{password}, #{nickname})
+	</insert>
 
 
 
