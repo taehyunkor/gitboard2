@@ -62,7 +62,7 @@
             </c:if>
             
              <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#download">게시판보기</a>
+              <a class="nav-link js-scroll-trigger" href="#download">그래프보기</a>
             </li>
           
            <c:if test="${member != null}">
