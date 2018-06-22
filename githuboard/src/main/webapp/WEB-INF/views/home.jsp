@@ -56,7 +56,7 @@
             </li>
                          
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">sign up</a>
+              <a class="nav-link js-scroll-trigger" href="register">sign up</a>
             </li>
             
             </c:if>
@@ -110,7 +110,7 @@
        
          
           
-          <a href="register" class="btn btn-default btn-lg">회원 가입</a>
+          <a href="write" class="btn btn-default btn-lg">게시판 쓰기</a>
          
        
       
