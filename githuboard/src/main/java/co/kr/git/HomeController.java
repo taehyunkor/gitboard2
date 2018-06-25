@@ -88,5 +88,10 @@ public class HomeController {
 			return "chat";
 		}
 	
+		@RequestMapping(value = "d3", method = RequestMethod.GET)
+		public String d3() {
+			
+			return "d3";
+		}
 	
 }

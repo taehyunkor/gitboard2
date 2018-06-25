@@ -51,6 +51,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
              <c:if test="${member == null}">
+              <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="d3">d3</a>
+            </li>
+             
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="login">로그인</a>
             </li>
@@ -106,13 +110,15 @@
         <div class="col-lg-8 mx-auto">
           
         
-          <a href="boardlist" class="btn btn-default btn-lg">게시판 보러가기</a>
+          <a href="list" class="btn btn-default btn-lg">게시판 보러가기</a>
        
          
-          
+          <c:if test="${member != null}">
           <a href="write" class="btn btn-default btn-lg">게시판 쓰기</a>
          
-       
+         
+           </c:if>
+          
       
      
       </div>

@@ -1,5 +1,8 @@
 package co.kr.git.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,5 +26,8 @@ public class BoardDao {
 	public void insert(PortfolioBoard board) {
 		sqlSession.insert("board.insert", board);
 	}
-	
+	//전체 목록을 가져오는 메소드
+		public List<Map<String, Object>> list(){
+			return sqlSession.selectList("board.list");
+		}
 }

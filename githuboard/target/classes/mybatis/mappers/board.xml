@@ -16,5 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into portfolioboard(num, email, title, content, writedate, ip, readcnt)
 	values(#{num}, #{email}, #{title}, #{content}, #{writedate}, #{ip}, #{readcnt})
 </insert>
-
+<!-- 게시물 전체의 글번호, 제목, 작성자별명, 작성일, 조회수를
+가져오는 sql -->
+<select id="list" resultType="java.util.Map">
+	select num, title, nickname, writedate, readcnt
+	from portfoliomember m, portfolioboard b
+	where m.email = b.email
+	order by writedate desc
+</select>
 </mapper>

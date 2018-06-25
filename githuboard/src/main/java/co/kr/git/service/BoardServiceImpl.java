@@ -1,6 +1,9 @@
 package co.kr.git.service;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -56,6 +59,30 @@ public class BoardServiceImpl implements BoardService {
 				//글쓰기 메소드 호출
 				boardDao.insert(board);
 
+	}
+	@Override
+	public List<Map<String, Object>> list() {
+        List<Map<String, Object>> list = boardDao.list();
+		
+		//오늘 날짜를 문자열로 만들기
+		Calendar calendar = Calendar.getInstance();
+		//sql의 Date는 toString을 하면 날짜만 리턴합니다.
+		java.sql.Date today = 
+			new java.sql.Date(calendar.getTimeInMillis());
+		//작성일과 오늘날짜를 비교해서 동일하면 시간을 저장하고
+		//그렇지 않으면 날짜를 저장
+		for(Map map : list) {
+			String writedate = map.get("WRITEDATE").toString();
+			if(today.toString().equals(writedate.substring(0,10))) {
+				map.put("WRITEDATE", writedate.substring(11));
+			}
+			else {
+				map.put("WRITEDATE", writedate.substring(1,10));
+			}
+		}
+		
+		
+		return list;
 	}
 
 }

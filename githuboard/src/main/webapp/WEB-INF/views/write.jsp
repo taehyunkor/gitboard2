@@ -7,6 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-${member}
+<section class="content">
+	<form method="post">
+		작성자${member.nickname}<br />
+		제목<input type="text" name="title" /><br />
+		내용<textarea name="content"></textarea><br />
+		<input type="submit" value="작성" />
+		<input type="button" id="mainbtn" value="메인" />
+	</form>
+	<script>
+		document.getElementById("mainbtn").addEventListener("click", 
+			function(){
+				location.href="./";
+		});
+	</script>
+</section>
 </body>
 </html>
